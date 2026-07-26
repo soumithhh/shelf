@@ -3,7 +3,7 @@ title: "Soumith"
 email: "soumithhh@gmail.com"
 description: "Personal blog and bookshelf"
 baseurl: "/shelf" # Subpath for username.github.io/shelf repository
-url: "soumithhh.github.io" # the base hostname & protocol for your site
+url: "https://soumithhh.github.io" # the base hostname & protocol for your site
 
 # Markdown Engine
 markdown: kramdown
