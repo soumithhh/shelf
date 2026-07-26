@@ -2,7 +2,7 @@
 title: "Soumith"
 email: "soumithhh@gmail.com"
 description: "Personal blog and bookshelf"
-baseurl: "/shelf" # Subpath for username.github.io/shelf repository
+baseurl: "soumithhh.github.io/shelf" # Subpath for username.github.io/shelf repository
 url: "" # the base hostname & protocol for your site
 
 # Markdown Engine
