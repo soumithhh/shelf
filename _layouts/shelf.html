@@ -1,0 +1,110 @@
+---
+layout: default
+---
+
+<div class="shelf-page">
+  <div class="shelf-header">
+    <h1 class="page-title">{{ page.title | default: "My Books" }}</h1>
+    {% if page.subtitle %}
+      <p class="page-subtitle">{{ page.subtitle }}</p>
+    {% else %}
+      <p class="page-subtitle">Mini Description</p>
+    {% endif %}
+  </div>
+
+  <div class="filters-bar">
+    <div class="filter-group">
+      <label for="categoryFilter" class="filter-label">Category:</label>
+      <select id="categoryFilter" class="filter-select">
+        <option value="All">All</option>
+        {% assign categories = site.books | map: "category" | uniq | compact %}
+        {% for cat in categories %}
+          <option value="{{ cat }}">{{ cat }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="sortBy" class="filter-label">Sort by:</label>
+      <select id="sortBy" class="filter-select">
+        <option value="finished_date">Date Read</option>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="books-list" id="booksList">
+    {% assign sorted_books = site.books | sort: "finished_date" | reverse %}
+    {% for book in sorted_books %}
+      <div class="book-card" 
+           data-category="{{ book.category }}" 
+           data-title="{{ book.title | escape }}" 
+           data-author="{{ book.author | escape }}" 
+           data-date="{{ book.finished_date }}">
+        <div class="book-cover-container">
+          {% if book.cover_image %}
+            <img src="{{ book.cover_image | relative_url }}" alt="{{ book.title }}" class="book-cover-img" />
+          {% else %}
+            <div class="book-cover-placeholder">Book Cover</div>
+          {% endif %}
+        </div>
+        <div class="book-info">
+          <a href="{{ book.url | relative_url }}" class="book-card-title">
+            {{ book.title }} - {{ book.author }}
+          </a>
+          <div class="book-tags-category">
+            {% if book.tags %}
+              {{ book.tags | join: ", " }} & {{ book.category }}
+            {% else %}
+              Tags & category
+            {% endif %}
+          </div>
+          <div class="book-summary">
+            {{ book.summary | default: book.description | default: "Mini Summary" }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const categorySelect = document.getElementById('categoryFilter');
+    const sortSelect = document.getElementById('sortBy');
+    const booksList = document.getElementById('booksList');
+
+    if (!categorySelect || !sortSelect || !booksList) return;
+
+    function updateBooks() {
+      const selectedCategory = categorySelect.value;
+      const sortBy = sortSelect.value;
+      const cards = Array.from(booksList.getElementsByClassName('book-card'));
+
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (selectedCategory === 'All' || cardCategory === selectedCategory) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      cards.sort((a, b) => {
+        let valA = (a.getAttribute('data-' + (sortBy === 'finished_date' ? 'date' : sortBy)) || '').toLowerCase();
+        let valB = (b.getAttribute('data-' + (sortBy === 'finished_date' ? 'date' : sortBy)) || '').toLowerCase();
+        
+        if (sortBy === 'finished_date') {
+          return valB.localeCompare(valA); // Newest first
+        }
+        return valA.localeCompare(valB);
+      });
+
+      cards.forEach(card => booksList.appendChild(card));
+    }
+
+    categorySelect.addEventListener('change', updateBooks);
+    sortSelect.addEventListener('change', updateBooks);
+  });
+</script>

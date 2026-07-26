@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<article class="post-detail">
+  <header style="margin-bottom: 24px;">
+    <h1 style="font-family: var(--font-sketch); font-size: 2.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+      {{ page.title }}
+    </h1>
+    <div style="font-size: 1.15rem; color: var(--text-muted);">
+      Published on {{ page.date | date: "%B %d, %Y" }} {% if page.author %}by {{ page.author }}{% endif %}
+      {% if page.category %} | Category: {{ page.category }}{% endif %}
+    </div>
+  </header>
+
+  <div class="book-content-section" style="margin-top: 16px;">
+    <div class="markdown-body">
+      {{ content }}
+    </div>
+  </div>
+</article>

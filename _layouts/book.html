@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<article class="book-detail">
+  <div class="book-detail-header">
+    <div class="book-detail-cover">
+      {% if page.cover_image %}
+        <img src="{{ page.cover_image | relative_url }}" alt="{{ page.title }}" class="book-cover-img" />
+      {% else %}
+        <div class="book-cover-placeholder">Book Cover</div>
+      {% endif %}
+    </div>
+
+    <div class="book-detail-info">
+      <h1 class="book-detail-title">{{ page.title }}</h1>
+      <div class="book-meta-item">
+        <span class="book-meta-label">By:</span> {{ page.author }}
+      </div>
+      <div class="book-meta-item">
+        <span class="book-meta-label">category:</span> {{ page.category }}
+      </div>
+      <div class="book-meta-item">
+        <span class="book-meta-label">Finished:</span> {{ page.finished_date }}
+      </div>
+    </div>
+  </div>
+
+  <div class="book-content-section">
+    <h2 class="book-content-header">Book Content:</h2>
+    <div class="markdown-body">
+      {{ content }}
+    </div>
+  </div>
+</article>
