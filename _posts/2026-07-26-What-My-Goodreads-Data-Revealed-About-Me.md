@@ -20,7 +20,7 @@ Here's what the data actually said about me.
 
 ---
 
-![Soumith's Goodreads Library — Visual Data Report](/assets/images/goodreads-library-report.png)
+![Soumith's Goodreads Library — Visual Data Report](/images/ba1.png)
 *A full breakdown of my 376-book Goodreads library — shelves, reading pace, ratings, top authors, and the special shelves that tell the most embarrassing stories.*
 
 ---
@@ -172,4 +172,4 @@ Until the next book — or the next dataset.
 
 ---
 
-*Soumith is the founder of [d/dx Media](https://ddxmedia.in), a social media agency based in Hyderabad. He writes about books, data, and the space where personal habits meet digital storytelling.*
+*Soumith is the founder of [d/dx Media](https://dbydxmedia.com), a social media agency based in Hyderabad. He writes about books, data, and the space where personal habits meet digital storytelling.*
