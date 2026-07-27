@@ -19,9 +19,6 @@ So I did what any self-respecting data enthusiast would do: I visualised the who
 Here's what the data actually said about me.
 
 ---
-
-![Soumith's Goodreads Library — Visual Data Report](/images/ba1.png)
-![Soumith's Goodreads Library — Visual Data Report](https://www.soumith.com/shelf/images/ba1.png))
 <img src="https://www.soumith.com/shelf/images/ba1.png" alt="Soumith's Goodreads Library — Visual Data Report" width="600" />
 *A full breakdown of my 376-book Goodreads library — shelves, reading pace, ratings, top authors, and the special shelves that tell the most embarrassing stories.*
 
