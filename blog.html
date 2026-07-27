@@ -10,9 +10,33 @@ permalink: /blog/
     <p class="page-subtitle">Thoughts, articles, and long-form writings</p>
   </div>
 
-  <div style="display: flex; flex-direction: column; gap: 24px; margin-top: 32px;">
+  <!-- Category Dropdown Filter -->
+  <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px;">
+    <label for="categoryFilter" style="font-family: var(--font-sketch); font-size: 1.2rem; font-weight: 700;">
+      Category:
+    </label>
+    <select 
+      id="categoryFilter" 
+      style="padding: 8px 16px; font-family: var(--font-sketch); font-size: 1.05rem; border: 2px solid #1e293b; border-radius: 8px; background: white; cursor: pointer;"
+    >
+      <option value="all">All Categories</option>
+      {% assign categories = site.posts | map: 'category' | uniq %}
+      {% for cat in categories %}
+        {% if cat and cat != "" %}
+          <option value="{{ cat }}">{{ cat }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Blog Posts List -->
+  <div id="postsList" style="display: flex; flex-direction: column; gap: 24px; margin-top: 32px;">
     {% for post in site.posts %}
-      <article style="border-bottom: 1.5px dashed #e2e8f0; padding-bottom: 20px;">
+      <article 
+        class="blog-post-card" 
+        data-category="{{ post.category }}"
+        style="border-bottom: 1.5px dashed #e2e8f0; padding-bottom: 20px;"
+      >
         <h2 style="font-family: var(--font-sketch); font-size: 2rem; font-weight: 700; margin-bottom: 6px;">
           <a href="{{ post.url | relative_url }}" style="color: var(--text-main); text-decoration: none;">
             {{ post.title }}
@@ -26,7 +50,31 @@ permalink: /blog/
         </p>
       </article>
     {% else %}
-      <p style="font-size: 1.2rem; color: var(--text-muted);">No blog posts found yet. Add posts in <code>_posts/</code> directory!</p>
+      <p style="font-size: 1.2rem; color: var(--text-muted);">No blog posts found yet.</p>
     {% endfor %}
   </div>
 </div>
+
+<!-- Category Filtering Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var select = document.getElementById('categoryFilter');
+    var posts = document.querySelectorAll('.blog-post-card');
+
+    if (select) {
+      select.addEventListener('change', function() {
+        var selectedCategory = this.value;
+
+        posts.forEach(function(post) {
+          var postCategory = post.getAttribute('data-category');
+          
+          if (selectedCategory === 'all' || postCategory === selectedCategory) {
+            post.style.display = 'block';
+          } else {
+            post.style.display = 'none';
+          }
+        });
+      });
+    }
+  });
+</script>
