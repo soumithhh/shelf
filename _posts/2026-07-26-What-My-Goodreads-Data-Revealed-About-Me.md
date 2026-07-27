@@ -18,7 +18,7 @@ So I did what any self-respecting data enthusiast would do: I visualised the who
 
 Here's what the data actually said about me.
 
-<p align="center">
+<p align="left">
   <img src="https://www.soumith.com/shelf/images/ba1.png" alt="Soumith's Goodreads Library — Visual Data Report" width="350" />
 </p>
 
